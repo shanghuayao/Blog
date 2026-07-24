@@ -1,0 +1,29 @@
+﻿---
+interface Props {
+  href: string;
+  title: string;
+  description: string;
+  year: string;
+  tags?: string[];
+}
+
+const { href, title, description, year, tags = [] } = Astro.props;
+const coverLabel = tags[0] || "Project";
+---
+
+<a class="content-card project-card" href={href}>
+  <div class="card-cover">
+    <span>{coverLabel}</span>
+  </div>
+  <div class="card-body">
+    <div class="meta-row">
+      <span>{year}</span>
+      <span>项目</span>
+    </div>
+    <h3>{title}</h3>
+    <p>{description}</p>
+    <div class="tags">
+      {tags.map((tag) => <span class="tag">{tag}</span>)}
+    </div>
+  </div>
+</a>

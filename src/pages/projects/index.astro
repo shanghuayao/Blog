@@ -1,0 +1,35 @@
+﻿---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ProjectCard from "../../components/ProjectCard.astro";
+
+const projects = (await getCollection("projects")).sort((a, b) =>
+  b.data.year.localeCompare(a.data.year),
+);
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, "")}`;
+---
+
+<BaseLayout title="项目 · 你的名字" description="作品、实验和项目记录。">
+  <section class="container page-head">
+    <p class="eyebrow">Projects</p>
+    <h1>项目</h1>
+    <p class="lead">展示已经完成、正在推进或值得记录的项目。</p>
+  </section>
+  <section class="section">
+    <div class="container grid">
+      {
+        projects.map((project) => (
+          <ProjectCard
+            href={withBase(`/projects/${project.slug}/`)}
+            title={project.data.title}
+            description={project.data.description}
+            year={project.data.year}
+            tags={project.data.tags}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

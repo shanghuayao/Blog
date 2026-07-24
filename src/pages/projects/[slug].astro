@@ -1,0 +1,35 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export async function getStaticPaths() {
+  const projects = await getCollection("projects");
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await project.render();
+---
+
+<BaseLayout title={`${project.data.title} · 你的名字`} description={project.data.description}>
+  <article class="article">
+    <header>
+      <p class="eyebrow">{project.data.year}</p>
+      <h1>{project.data.title}</h1>
+      <p class="lead">{project.data.description}</p>
+      <div class="tags">
+        {project.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+    </header>
+    <div class="content">
+      <Content />
+    </div>
+    <div class="tags">
+      {project.data.repo && <a class="tag" href={project.data.repo}>GitHub</a>}
+      {project.data.demo && <a class="tag" href={project.data.demo}>在线预览</a>}
+    </div>
+  </article>
+</BaseLayout>

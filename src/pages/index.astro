@@ -1,0 +1,111 @@
+﻿---
+import { getCollection } from "astro:content";
+import PostCard from "../components/PostCard.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site.config";
+
+const allPosts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+const allProjects = await getCollection("projects");
+const projects = allProjects.filter((project) => project.data.featured).slice(0, 2);
+const posts = allPosts.slice(0, 2);
+
+const siteStartDate = new Date(`${siteConfig.startDate}T00:00:00+08:00`);
+const runDays = Math.max(
+  1,
+  Math.ceil((Date.now() - siteStartDate.getTime()) / (1000 * 60 * 60 * 24)),
+);
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, "")}`;
+---
+
+<BaseLayout title={`${siteConfig.name} · ${siteConfig.role}`} description={siteConfig.description}>
+  <section class="container home-intro">
+    <div class="intro-copy">
+      <p class="eyebrow">{siteConfig.identity}</p>
+      <h1>{siteConfig.name}</h1>
+      <p class="lead">{siteConfig.home.intro}</p>
+    </div>
+
+    <div class="home-stats" aria-label="博客统计">
+      <div class="home-stat">
+        <strong>{allProjects.length}</strong>
+        <span>已收录项目</span>
+      </div>
+      <div class="home-stat">
+        <strong>{allPosts.length}</strong>
+        <span>已发布文章</span>
+      </div>
+      <div class="home-stat">
+        <strong>{runDays}</strong>
+        <span>博客运行天数</span>
+      </div>
+    </div>
+
+    <div class="attitude-grid" aria-label="技术态度">
+      {
+        siteConfig.attitudes.map((item, index) => (
+          <article class="attitude-card">
+            <span>{String(index + 1).padStart(2, "0")}</span>
+            <h2>{item.title}</h2>
+            <p>{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>精选项目</h2>
+          <p>{siteConfig.home.featuredProjectsDescription}</p>
+        </div>
+        <a class="text-link" href={withBase("/projects/")}>查看全部</a>
+      </div>
+      <div class="content-grid">
+        {
+          projects.map((project) => (
+            <ProjectCard
+              href={withBase(`/projects/${project.slug}/`)}
+              title={project.data.title}
+              description={project.data.description}
+              year={project.data.year}
+              tags={project.data.tags}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section latest-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <h2>最新文章</h2>
+          <p>{siteConfig.home.latestPostsDescription}</p>
+        </div>
+        <a class="text-link" href={withBase("/blog/")}>查看全部</a>
+      </div>
+      <div class="content-grid">
+        {
+          posts.map((post) => (
+            <PostCard
+              href={withBase(`/blog/${post.slug}/`)}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              tags={post.data.tags}
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</BaseLayout>

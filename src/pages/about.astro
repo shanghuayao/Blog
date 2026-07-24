@@ -1,0 +1,26 @@
+﻿---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { siteConfig } from "../site.config";
+---
+
+<BaseLayout title={`关于 · ${siteConfig.name}`} description={siteConfig.about.description}>
+  <section class="container page-head">
+    <p class="eyebrow">About</p>
+    <h1>关于我</h1>
+    <p class="lead">{siteConfig.about.intro}</p>
+  </section>
+  <section class="section">
+    <div class="container grid">
+      {
+        siteConfig.about.cards.map((card) => (
+          <div class="card">
+            <div>
+              <h3>{card.title}</h3>
+              <p>{card.body}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

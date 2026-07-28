@@ -1,0 +1,61 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { siteConfig } from "../../site.config";
+import { filterPostsByTaxonomy, getTagSummaries, taxonomyHref } from "../../lib/tags";
+
+export async function getStaticPaths() {
+  const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
+  const parents = getTagSummaries(posts);
+
+  return parents.map((parent) => ({
+    params: { parent: parent.slug },
+    props: { parent },
+  }));
+}
+
+const { parent } = Astro.props;
+const posts = (await getCollection("blog"))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const taggedPosts = filterPostsByTaxonomy(posts, parent.slug);
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base}${path.replace(/^\//, "")}`;
+const title = `${parent.name} | ${siteConfig.defaultTitle}`;
+const description = `\u6d4f\u89c8 ${parent.name} \u5927\u7c7b\u4e0b\u7684\u6587\u7ae0\u3002`;
+const countText = `${parent.count} \u7bc7\u6587\u7ae0`;
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="container page-head tag-page-head">
+    <p class="eyebrow">Tag</p>
+    <h1>{parent.name}</h1>
+    <p class="lead">{countText}</p>
+    <div class="tags tag-page-children">
+      {
+        parent.children.map((child) => (
+          <a class="tag" href={taxonomyHref(child)}>
+            {child.childName}
+            <span>{child.count}</span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+  <section class="section">
+    <div class="container blog-grid">
+      {
+        taggedPosts.map((post) => (
+          <PostCard
+            href={withBase(`/blog/${post.slug}/`)}
+            title={post.data.title}
+            description={post.data.description}
+            pubDate={post.data.pubDate}
+            tags={post.data.tags}
+          />
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

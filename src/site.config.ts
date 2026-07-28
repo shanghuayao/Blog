@@ -1,6 +1,7 @@
-﻿export const siteConfig = {
+export const siteConfig = {
   name: "shanghuayao",
   brand: "shanghuayao的独立博客",
+  github: "https://github.com/shanghuayao",
   role: "Java 开发工程师",
   identity: "Java Developer · Agent Learner · Vibe Coding",
   description:

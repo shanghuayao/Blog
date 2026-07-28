@@ -1,6 +1,8 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BackToTop from "../../components/BackToTop.astro";
+import { siteConfig } from "../../site.config";
 
 export async function getStaticPaths() {
   const projects = await getCollection("projects");
@@ -11,25 +13,44 @@ export async function getStaticPaths() {
 }
 
 const { project } = Astro.props;
-const { Content } = await project.render();
+const { Content, headings } = await project.render();
+const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+const hasToc = tocHeadings.length > 0;
 ---
 
-<BaseLayout title={`${project.data.title} · 你的名字`} description={project.data.description}>
-  <article class="article">
-    <header>
-      <p class="eyebrow">{project.data.year}</p>
-      <h1>{project.data.title}</h1>
-      <p class="lead">{project.data.description}</p>
-      <div class="tags">
-        {project.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+<BaseLayout title={`${project.data.title} | ${siteConfig.defaultTitle}`} description={project.data.description}>
+  <div class:list={["article-shell", { "no-toc": !hasToc }]}>
+    {
+      hasToc && (
+        <aside class="article-toc" aria-label="项目目录">
+          <p>目录</p>
+          <nav>
+            {tocHeadings.map((heading) => (
+              <a class={`toc-link depth-${heading.depth}`} href={`#${heading.slug}`}>
+                {heading.text}
+              </a>
+            ))}
+          </nav>
+        </aside>
+      )
+    }
+    <article class="article project-article">
+      <header>
+        <p class="eyebrow">{project.data.year}</p>
+        <h1>{project.data.title}</h1>
+        <p class="lead">{project.data.description}</p>
+        <div class="tags">
+          {project.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+      </header>
+      <div class="content">
+        <Content />
       </div>
-    </header>
-    <div class="content">
-      <Content />
-    </div>
-    <div class="tags">
-      {project.data.repo && <a class="tag" href={project.data.repo}>GitHub</a>}
-      {project.data.demo && <a class="tag" href={project.data.demo}>在线预览</a>}
-    </div>
-  </article>
+      <div class="tags">
+        {project.data.repo && <a class="tag" href={project.data.repo}>GitHub</a>}
+        {project.data.demo && <a class="tag" href={project.data.demo}>在线预览</a>}
+      </div>
+    </article>
+  </div>
+  <BackToTop />
 </BaseLayout>

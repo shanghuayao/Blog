@@ -1,6 +1,9 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import BackToTop from "../../components/BackToTop.astro";
+import { siteConfig } from "../../site.config";
+import { getTaxonomyTags, taxonomyHref, taxonomyLabel } from "../../lib/tags";
 
 export async function getStaticPaths() {
   const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
@@ -11,29 +14,57 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content, headings } = await post.render();
+const tocHeadings = headings.filter((heading) => heading.depth >= 2 && heading.depth <= 3);
+const hasToc = tocHeadings.length > 0;
+const taxonomyTags = getTaxonomyTags({ title: post.data.title, tags: post.data.tags });
+const sourceLabel = "原文链接";
 ---
 
-<BaseLayout title={`${post.data.title} · 你的名字`} description={post.data.description}>
-  <article class="article">
-    <header>
-      <p class="eyebrow">
-        {
-          post.data.pubDate.toLocaleDateString("zh-CN", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
-      </p>
-      <h1>{post.data.title}</h1>
-      <p class="lead">{post.data.description}</p>
-      <div class="tags">
-        {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+<BaseLayout title={`${post.data.title} | ${siteConfig.defaultTitle}`} description={post.data.description}>
+  <div class:list={["article-shell", { "no-toc": !hasToc }]}>
+    {
+      hasToc && (
+        <aside class="article-toc" aria-label="文章目录">
+          <p>目录</p>
+          <nav>
+            {tocHeadings.map((heading) => (
+              <a class={`toc-link depth-${heading.depth}`} href={`#${heading.slug}`}>
+                {heading.text}
+              </a>
+            ))}
+          </nav>
+        </aside>
+      )
+    }
+    <article class="article blog-article">
+      <header>
+        <p class="eyebrow">
+          {
+            post.data.pubDate.toLocaleDateString("zh-CN", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </p>
+        <h1>{post.data.title}</h1>
+        <p class="lead">{post.data.description}</p>
+        <div class="tags">
+          {taxonomyTags.map((tag) => <a class="tag" href={taxonomyHref(tag)}>{taxonomyLabel(tag)}</a>)}
+          {
+            post.data.source && (
+              <a class="tag source-tag" href={post.data.source} target="_blank" rel="noreferrer">
+                {sourceLabel}
+              </a>
+            )
+          }
+        </div>
+      </header>
+      <div class="content">
+        <Content />
       </div>
-    </header>
-    <div class="content">
-      <Content />
-    </div>
-  </article>
+    </article>
+  </div>
+  <BackToTop />
 </BaseLayout>

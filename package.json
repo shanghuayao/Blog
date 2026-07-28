@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "csdn:collect": "node tools/collect-csdn-links.mjs",
+    "csdn:import": "node tools/import-csdn.mjs",
+    "csdn:images": "node tools/localize-csdn-images.mjs"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.11",

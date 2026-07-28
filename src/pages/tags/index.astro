@@ -1,0 +1,45 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { siteConfig } from "../../site.config";
+import { getTagSummaries, taxonomyHref } from "../../lib/tags";
+
+const posts = (await getCollection("blog")).filter((post) => !post.data.draft);
+const tags = getTagSummaries(posts);
+const title = `\u6807\u7b7e | ${siteConfig.defaultTitle}`;
+const description = "\u6309\u7236\u5b50\u7ea7\u6807\u7b7e\u6d4f\u89c8\u6587\u7ae0\u548c\u6280\u672f\u7b14\u8bb0\u3002";
+const heading = "\u6807\u7b7e";
+const postsLabel = "\u7bc7\u6587\u7ae0";
+---
+
+<BaseLayout title={title} description={description}>
+  <section class="container page-head">
+    <p class="eyebrow">Tags</p>
+    <h1>{heading}</h1>
+  </section>
+  <section class="section">
+    <div class="container tag-cloud tag-tree">
+      {
+        tags.map((parent) => (
+          <article class="tag-cloud-item tag-tree-item">
+            <a class="tag-tree-parent" href={taxonomyHref({ parentName: parent.name, parentSlug: parent.slug })}>
+              <span>{parent.name}</span>
+              <strong>{parent.count}</strong>
+              <em>{postsLabel}</em>
+            </a>
+            <div class="tag-tree-children">
+              {
+                parent.children.map((child) => (
+                  <a class="tag" href={taxonomyHref(child)}>
+                    {child.childName}
+                    <span>{child.count}</span>
+                  </a>
+                ))
+              }
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

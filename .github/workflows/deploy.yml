@@ -36,7 +36,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL }}
+          PUBLIC_SITE_URL: ${{ vars.PUBLIC_SITE_URL || 'https://shanghuayao.github.io' }}
           PUBLIC_BASE_PATH: ${{ vars.PUBLIC_BASE_PATH || '/Blog/' }}
 
       - name: Upload artifact
@@ -54,4 +54,3 @@ jobs:
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
-

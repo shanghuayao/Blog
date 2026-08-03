@@ -2,7 +2,7 @@
 title: "linux 下 mysql 常用命令"
 description: "本文提供MySQL数据库的基本操作指导，包括服务的启停、登录方式、密码修改、常用SQL指令及数据库的导入导出方法等，适合初学者快速上手。"
 pubDate: 2021-06-18
-tags: ["mysql", "linux", "数据库"]
+tags: ["运维"]
 source: "https://blog.csdn.net/shanghuayao/article/details/118016725"
 ---
 **阅读目录 ======================**

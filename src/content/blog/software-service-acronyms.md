@@ -2,7 +2,7 @@
 title: "CMS、SaaS、ERP 分别是什么意思？常见软件服务简称速查"
 description: "整理 CMS、SaaS、ERP、CRM、BI、PaaS、IaaS 等常见软件服务简称的含义、区别和典型场景。"
 pubDate: 2024-05-20
-tags: ["软件服务", "企业软件", "SaaS"]
+tags: ["开发常识"]
 ---
 
 

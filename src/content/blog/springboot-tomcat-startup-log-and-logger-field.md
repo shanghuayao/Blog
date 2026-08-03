@@ -2,7 +2,7 @@
 title: "如何禁止tomcat的启动日志，以及为什么要将log日志对象声明为private static final类型的呢？"
 description: "本文介绍如何通过调整日志级别来禁止Springboot应用中嵌入式Tomcat的启动日志显示，并解释了为什么需要将日志对象声明为private static final类型。"
 pubDate: 2021-04-01
-tags: ["log4j", "logback", "spring", "java"]
+tags: ["java"]
 source: "https://blog.csdn.net/shanghuayao/article/details/115371980"
 ---
 ### 1、如何禁止tomcat的启动日志

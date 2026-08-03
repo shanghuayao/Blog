@@ -2,7 +2,7 @@
 title: "关于接口安全认证方式"
 description: "本文围绕Java网络接口安全展开，介绍了开放平台的AccessKey&SecretKey验证方案，包括请求身份分配、防止篡改的参数签名、重放攻击的timestamp+nonce方案及实现；还阐述了APP的Token&AppKey验证，如Token身份验证及Token+AppKey签名验证，保障接口安全。"
 pubDate: 2020-12-29
-tags: ["java", "网络接口", "安全"]
+tags: ["java"]
 source: "https://blog.csdn.net/shanghuayao/article/details/111899700"
 ---
 ### 一.AccessKey&SecretKey （开放平台）

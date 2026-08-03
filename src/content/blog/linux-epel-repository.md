@@ -2,7 +2,7 @@
 title: "epel源-是什么?为什么安装？"
 description: "博客提及EPEL源，探讨其是什么以及为何要安装，还给出相关来源链接https://www.cnblogs.com/fps2tao/p/7580188.html ，涉及Linux系统相关知识。"
 pubDate: 2020-12-28
-tags: ["yum", "centos", "linux"]
+tags: ["运维"]
 source: "https://blog.csdn.net/shanghuayao/article/details/111875093"
 ---
 > EPEL源-是什么?为什么安装？

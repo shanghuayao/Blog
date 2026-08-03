@@ -2,7 +2,7 @@
 title: "JAVA synchronized锁的是什么"
 description: "本文探讨了Java中的synchronized关键字在解决共享资源冲突中的作用。详细解释了对象锁、类锁的概念，并通过示例代码展示了如何使用synchronized实现线程同步，确保并发环境下的数据一致性。同时强调了何时应该使用同步以及同步的重要性。"
 pubDate: 2023-06-30
-tags: ["java", "开发语言"]
+tags: ["java", "并发编程"]
 source: "https://blog.csdn.net/shanghuayao/article/details/131469958"
 ---
 ### 文章有错误和不严谨的地方欢迎大家的指正，帮助我继续进步，谢谢

@@ -2,7 +2,7 @@
 title: "java设计模式：策略模式"
 description: "本文探讨了如何通过策略模式改进约会策略，避免冗长条件判断，提高代码灵活性和可维护性。通过定义DateStrategy接口和具体实现如AGirlAction和BGirlAction，展示了如何在面对不同女孩时灵活切换行为，同时强调了其优缺点。"
 pubDate: 2022-12-30
-tags: ["策略模式", "java", "设计模式"]
+tags: ["java", "设计模式"]
 source: "https://blog.csdn.net/shanghuayao/article/details/128497324"
 ---
 如果你想去约会不同的小姐姐，那就要根据小姐姐的喜好来决定带她去做什么？

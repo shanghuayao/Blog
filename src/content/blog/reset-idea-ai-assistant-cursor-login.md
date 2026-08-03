@@ -2,7 +2,7 @@
 title: "如何重置idea ai assistant ACP 插件中的 Cursor 账号登录状态？"
 description: "在使用 JetBrains 系列 IDE（如 IntelliJ IDEA, PyCharm 等）配合插件时，经常会遇到想要更换 Cursor 账号却“退出无门”的情况。即使卸载插件还是会重新登录之前的账号。本文分享一个通过手动运行本地 Agent 脚本强制重置授权的方法。_idea里面得cursor怎么更好账号"
 pubDate: 2026-03-20
-tags: ["intellij-idea", "java", "ide"]
+tags: ["开发工具"]
 source: "https://blog.csdn.net/shanghuayao/article/details/159283931"
 ---
 在使用 JetBrains 系列 IDE（如 IntelliJ IDEA, PyCharm 等）配合 **ACP (AI Assistant)** 插件时，经常会遇到想要更换 Cursor 账号却“退出无门”的情况。即使卸载插件还是会重新登录之前的账号。

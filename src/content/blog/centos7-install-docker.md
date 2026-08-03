@@ -2,7 +2,7 @@
 title: "Centos7上安装docker命令详解"
 description: "本文详细介绍了在Centos7上安装Docker的过程，包括检查系统内核版本、更新yum包、卸载旧版本、安装必要软件包、设置yum源、安装Docker及验证安装等步骤。同时针对安装过程中可能遇到的问题提供了具体的解决办法。"
 pubDate: 2020-12-12
-tags: ["docker", "linux", "centos"]
+tags: ["运维"]
 source: "https://blog.csdn.net/shanghuayao/article/details/111086414"
 ---
 ## Centos7上安装docker命令详解

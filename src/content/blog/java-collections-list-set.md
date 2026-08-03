@@ -2,7 +2,7 @@
 title: "JAVA集合——常用单列集合"
 description: "本文详细分析了Java中的Collection接口实现，包括ArrayList基于数组的有序可重复存储，LinkedList的双向链表结构，以及Set的不同子类如HashSet、LinkedHashSet和TreeSet的特性，重点讲解了扩容机制和线程安全问题。"
 pubDate: 2024-03-20
-tags: ["java", "开发语言"]
+tags: ["java"]
 source: "https://blog.csdn.net/shanghuayao/article/details/136716855"
 ---
 ## Collection接口的实现UML

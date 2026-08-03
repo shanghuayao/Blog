@@ -2,7 +2,7 @@
 title: "Java各个版本的新特性"
 description: "本文详细介绍了JDK从1.0到13各版本的发布时间和特性。如JDK 1.0是初代版本但性能差；JAVA 8引入Lambda表达式等；JAVA 9有模块系统等新特性。还提及各版本截止时间，指出JDK 11是长期支持版本。"
 pubDate: 2020-12-29
-tags: ["jdk", "java", "jvm", "编程语言"]
+tags: ["java"]
 source: "https://blog.csdn.net/shanghuayao/article/details/111879933"
 ---
 ## JDK Version 1.0

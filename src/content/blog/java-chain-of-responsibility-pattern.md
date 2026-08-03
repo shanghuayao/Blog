@@ -2,7 +2,7 @@
 title: "java设计模式：责任链模式"
 description: "本文介绍责任链模式的基本概念，通过两个代码示例展示其在Java中的应用，包括如何处理请求和响应，以及如何通过链条传递请求。此外还讨论了该模式的优点和缺点。"
 pubDate: 2022-12-13
-tags: ["java", "设计模式", "责任链模式"]
+tags: ["java", "设计模式"]
 source: "https://blog.csdn.net/shanghuayao/article/details/128302727"
 ---
 > 顾名思义，责任链模式（Chain of Responsibility Pattern）为请求创建了一个接收者对象的链。这种模式给予请求的类型，对请求的发送者和接收者进行解耦。这种类型的设计模式属于行为型模式。

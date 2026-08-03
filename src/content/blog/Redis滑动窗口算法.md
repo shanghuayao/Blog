@@ -3,7 +3,6 @@ title: "Redis 滑动窗口算法"
 description: "本文详细介绍了基于 Redis 实现滑动窗口（Sliding Window）限流算法，核心目的是解决传统“固定窗口算法”在临界点突发流量（临界双倍均值问题）上的缺陷。"
 pubDate: 2021-10-09
 tags: ["redis"]
-source: ""
 ---
 # Redis 滑动窗口算法
 

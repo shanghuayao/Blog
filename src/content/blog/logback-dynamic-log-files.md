@@ -2,7 +2,7 @@
 title: "logback 根据不同参数创建logger并将内容输出到不同文件"
 description: "【代码】logback 根据不同参数创建logger并将内容输出到不同文件。_logback输出到不同文件"
 pubDate: 2023-05-31
-tags: ["logback", "java", "开发语言", "log4j"]
+tags: ["java"]
 source: "https://blog.csdn.net/shanghuayao/article/details/130973524"
 ---
 ```java
